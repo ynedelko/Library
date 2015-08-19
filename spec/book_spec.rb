@@ -35,4 +35,15 @@ describe(Book) do
       expect(Book.find(test_book2.id())).to(eq(test_book2))
     end
   end
+  # describe('#authors') do
+  #   it("returns an array of authors for that book") do
+  #     test_book = Book.new({:title => "Too Loud a Solitude", :id => nil})
+  #     test_book.save()
+  #     test_author = Author.new({:name => "Bohumil Hrabal", :id => nil})
+  #     test_author.save()
+  #     test_author2 = Author.new({:name => "Byron", :id => nil})
+  #     test_author2.save()
+  #     expect(test_book.authors()).to(eq([test_author, test_author]))
+  #   end
+  # end
 end
