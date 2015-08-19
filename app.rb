@@ -21,3 +21,8 @@ post('/book/new') do
   @books = Book.all()
   erb(:index)
 end
+
+get('/book/:id') do
+  @book = Book.find(params.fetch('id').to_i())
+  erb(:book)
+end
