@@ -9,9 +9,17 @@ class Book
     returned_books = DB.exec("SELECT * FROM books;")
     books =[]
     returned_books.each() do |book|
-      title = title.fetch("title")
-      title.push(Book.new({:title => title}))
+      title = book.fetch("title")
+      books.push(Book.new({:title => title}))
     end
     books
+  end
+
+  define_method(:==) do |another_book|
+    self.title().==(another_book.title())
+  end
+
+  define_method(:save) do
+    DB.exec("INSERT INTO books (title) VALUES ('#{@title}')")
   end
 end
