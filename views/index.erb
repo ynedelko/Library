@@ -1,0 +1,21 @@
+<h1>Welcome to Our Beautiful Library</h1>
+<h2>full of books and wonder</h2>
+<h2>We have really good taste!</h2>
+
+<h2>Catalog:</h2>
+<% if @success_message != nil %> <%= @success_message %> <% end %>
+<% if @books.any?() %>
+<h3>Here are the available books:</h3>
+<% @books.each() do |book| %>
+<%= book.title() %>
+<% end %>
+<% else %>
+<p>
+  There are no books yet, please add below.
+</p>
+<% end %>
+
+<form method='post' action='/book/new'>
+  <input name='title' type='text' placeholder='Title'>
+  <button type="submit">Add Book</button>
+</form>
