@@ -8,3 +8,9 @@
 
   <button type="submit">Rename</button>
 </form>
+
+<form action="/book/<%= @book.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+
+  <button type="submit">Delete Book</button>
+</form>

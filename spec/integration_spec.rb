@@ -33,4 +33,12 @@ describe('the whole library', {:type => :feature}) do
     click_button('Rename')
     expect(page).to have_content("Everybody Poops")
   end
+
+  it('deletes the name of the chosen book') do
+    test_book = Book.new({:title => 'The Giving Tree', :id => nil})
+    test_book.save()
+    visit("/book/#{test_book.id()}/edit")
+    click_button('Delete Book')
+    expect(page).to have_no_content('The Giving Tree')
+  end
 end
