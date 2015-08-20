@@ -35,6 +35,15 @@ describe(Book) do
       expect(Book.find(test_book2.id())).to(eq(test_book2))
     end
   end
+  describe('#update') do
+    it('lets you update books in the database') do
+      book = Book.new({:title => "Too Loud a Solitude", :id => nil})
+      book.save()
+      book.update({:title => "The Lover of Lady Chatterly"})
+      expect(book.title()).to(eq("The Lover of Lady Chatterly"))
+    end
+  end
+
   # describe('#authors') do
   #   it("returns an array of authors for that book") do
   #     test_book = Book.new({:title => "Too Loud a Solitude", :id => nil})

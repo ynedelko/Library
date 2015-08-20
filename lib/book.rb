@@ -35,4 +35,10 @@ class Book
     end
     found_book
   end
+
+  define_method(:update) do |attributes|
+    @title = attributes.fetch(:title)
+    @id = self.id()
+    DB.exec("UPDATE books SET title = '#{@title}' WHERE id = #{@id};")
+  end
 end
