@@ -38,7 +38,7 @@ class Book
 
   define_method(:update) do |attributes|
     @title = attributes.fetch(:title, @title)
-    #@id = attributes.fetch(:id).to_i()
+    #@id = attributes.fetch(:id).to_i() ### ASK SOMEBODY WHY AT SOME POINT. NOT NOW.
 
     DB.exec("UPDATE books SET title = '#{@title}' WHERE id = #{self.id()};")
 
