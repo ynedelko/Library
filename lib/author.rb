@@ -60,5 +60,6 @@ class Author
 
   define_method(:delete) do
     DB.exec("DELETE FROM authors WHERE id = #{self.id()};")
+    DB.exec("DELETE FROM authors_books WHERE author_id = #{self.id()}")
   end
 end
