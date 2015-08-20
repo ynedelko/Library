@@ -3,7 +3,7 @@
 <h2>We have really good taste!</h2>
 
 <h2>Catalog:</h2>
-<% if @success_message != nil %> <%= @success_message %> <% end %>
+<% if @success_message != nil %> <%= @success_message %><% end %>
 <% if @books.any?() %>
 <h3>Here are the available books:</h3>
 <% @books.each() do |book| %>
@@ -19,3 +19,5 @@
   <input name='title' type='text' placeholder='Title'>
   <button type="submit">Add Book</button>
 </form>
+
+<h2><a href= "/authors"> Click Here to See our Author's List </a></h2>

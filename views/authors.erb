@@ -1,0 +1,18 @@
+<h3>Here are the available authors:</h3>
+
+<% if @success_message_author != nil %> <%= @success_message_author %> <% end %>
+<% if @authors.any?() %>
+
+<% @authors.each() do |author| %>
+<a href="/author/<%=author.id()%>"><%= author.title() %></a>
+<% end %>
+<% else %>
+<p>
+  There are no authors yet, please add below.
+</p>
+<% end %>
+
+<form method='post' action='/author/new'>
+  <input name='name' type='text' placeholder='Name'>
+  <button type="submit">Add Author</button>
+</form>

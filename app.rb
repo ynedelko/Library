@@ -22,6 +22,20 @@ post("/book/new") do
   erb(:index)
 end
 
+get('/authors') do
+  @authors = Author.all()
+  erb(:authors)
+end
+
+post("/author/new") do
+  name = params.fetch("name")
+  author = Author.new({:name => name, :id => nil})
+  author.save()
+  @success_message_author = "You have added the wordsmith #{author}."
+  @authors = Author.all()
+  erb(:authors)
+end
+
 get("/book/:id") do
   @book = Book.find(params.fetch('id').to_i())
   erb(:book)
@@ -36,6 +50,7 @@ patch("/book/:id") do
   title = params.fetch("title")
   @book = Book.find(params.fetch("id").to_i())
   @book.update({:title => title})
+  @books = Book.all()
   erb(:index)
 end
 
