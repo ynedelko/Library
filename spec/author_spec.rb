@@ -35,4 +35,22 @@ describe(Author) do
       expect(Author.find(test_author2.id())).to(eq(test_author2))
     end
   end
+  describe('#update') do
+    it('lets you update authors in the database') do
+      author = Author.new({:name => "Cool Author", :id => nil})
+      author.save()
+      author.update({:name => "Cooler Author"})
+      expect(author.name()).to(eq("Cooler Author"))
+    end
+  end
+  describe("#delete") do
+    it("lets you delete an author from the database") do
+      author = Author.new({:name => "Author Person", :id => nil})
+      author.save()
+      author2 = Author.new({:name => "Author Non-Person", :id => nil})
+      author2.save()
+      author.delete()
+      expect(Author.all).to(eq([author2]))
+    end
+  end
 end
