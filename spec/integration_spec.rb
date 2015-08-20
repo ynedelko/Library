@@ -18,11 +18,19 @@ describe('the whole library', {:type => :feature}) do
     expect(page).to have_content('Happiness')
   end
 
-  # it('displays information about the chosen book') do
-  #   test_book = Book.new({:title => 'Where The Wild Things Are', :id => nil})
-  #   test_book.save()
-  #   visit("/book/#{test_book.id()}")
-  #   expect(page).to have_content("Where The Wild Things Are")
-  #   expect(page).to have_button('Delete')
-  # end
+  it('displays information about the chosen book') do
+    test_book = Book.new({:title => 'Where The Wild Things Are', :id => nil})
+    test_book.save()
+    visit("/book/#{test_book.id()}")
+    expect(page).to have_content("Where The Wild Things Are")
+  end
+
+  it('edits the name of the chosen book') do
+    test_book = Book.new({:title => 'Where The Wild Things Are', :id => nil})
+    test_book.save()
+    visit("/book/#{test_book.id()}/edit")
+    fill_in('title', :with => "Everybody Poops")
+    click_button('Rename')
+    expect(page).to have_content("Everybody Poops")
+  end
 end
