@@ -31,11 +31,37 @@ post("/author/new") do
   name = params.fetch("name")
   author = Author.new({:name => name, :id => nil})
   author.save()
-  @success_message_author = "You have added the wordsmith #{author}."
+  @success_message_author = "You have added the wordsmith #{name}."
   @authors = Author.all()
   erb(:authors)
 end
 
+get("/author/:id") do
+  @author = Author.find(params.fetch('id').to_i())
+  erb(:author)
+end
+
+get("/author/:id/edit") do
+  @author = Author.find(params.fetch('id').to_i())
+  erb(:author_edit)
+end
+
+patch("/author/:id") do
+  name = params.fetch("name")
+  @author = Author.find(params.fetch("id").to_i())
+  @author.update({:name => name})
+  @authors = Author.all()
+  erb(:authors)
+end
+
+delete("/author/:id") do
+  @author = Author.find(params.fetch("id").to_i())
+  @author.delete()
+  @authors = Author.all()
+  erb(:authors)
+end
+
+### books below
 get("/book/:id") do
   @book = Book.find(params.fetch('id').to_i())
   erb(:book)

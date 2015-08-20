@@ -4,7 +4,7 @@
 <% if @authors.any?() %>
 
 <% @authors.each() do |author| %>
-<a href="/author/<%=author.id()%>"><%= author.title() %></a>
+<a href="/author/<%=author.id()%>"><%= author.name() %></a>
 <% end %>
 <% else %>
 <p>

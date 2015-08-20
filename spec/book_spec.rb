@@ -35,6 +35,7 @@ describe(Book) do
       expect(Book.find(test_book2.id())).to(eq(test_book2))
     end
   end
+
   describe('#update') do
     it('lets you update books in the database') do
       book = Book.new({:title => "Too Loud a Solitude", :id => nil})
@@ -42,7 +43,32 @@ describe(Book) do
       book.update({:title => "The Lover of Lady Chatterly"})
       expect(book.title()).to(eq("The Lover of Lady Chatterly"))
     end
+
+    it("lets you add authors to a book") do
+      book = Book.new({:title => "Too Loud a Solitude", :id => nil})
+      book.save()
+      honey = Author.new({:name => "honey", :id => nil})
+      honey.save()
+      booboo = Author.new({:name => "booboo", :id => nil})
+      booboo.save()
+      book.update({:author_ids => [honey.id(), booboo.id()]})
+      expect(book.authors()).to(eq([honey, booboo]))
+    end
   end
+
+  describe("#authors") do
+    it("returns all of the authors of a particular") do
+      book = Book.new({:title => "Cat in the Hat", :id => nil})
+      book.save()
+      seuss = Author.new({:name => "Dr. Seuss", :id => nil})
+      seuss.save()
+      deuss = Author.new({:name => "Deuss, Phd", :id => nil})
+      deuss.save()
+      book.update({:author_ids => [seuss.id(), deuss.id()]})
+      expect(book.authors()).to(eq([seuss, deuss]))
+    end
+  end
+
   describe("#delete") do
     it("lets you delete a book from the database") do
       book = Book.new({:title => "From Death Camp to Existentialism", :id => nil})
@@ -54,15 +80,4 @@ describe(Book) do
     end
   end
 
-  # describe('#authors') do
-  #   it("returns an array of authors for that book") do
-  #     test_book = Book.new({:title => "Too Loud a Solitude", :id => nil})
-  #     test_book.save()
-  #     test_author = Author.new({:name => "Bohumil Hrabal", :id => nil})
-  #     test_author.save()
-  #     test_author2 = Author.new({:name => "Byron", :id => nil})
-  #     test_author2.save()
-  #     expect(test_book.authors()).to(eq([test_author, test_author]))
-  #   end
-  # end
 end
