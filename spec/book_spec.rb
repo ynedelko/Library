@@ -43,6 +43,16 @@ describe(Book) do
       expect(book.title()).to(eq("The Lover of Lady Chatterly"))
     end
   end
+  describe("#delete") do
+    it("lets you delete a book from the database") do
+      book = Book.new({:title => "From Death Camp to Existentialism", :id => nil})
+      book.save()
+      book2 = Book.new({:title => "When You Give a Mouse a Cookie", :id => nil})
+      book2.save()
+      book.delete()
+      expect(Book.all).to(eq([book2]))
+    end
+  end
 
   # describe('#authors') do
   #   it("returns an array of authors for that book") do
