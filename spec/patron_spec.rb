@@ -35,4 +35,22 @@ describe(Patron) do
       expect(Patron.find(test_patron2.id())).to(eq(test_patron2))
     end
   end
+  describe('#update') do
+    it('lets you update patrons in the database') do
+      patron = Patron.new({:name => "Cool Patron", :id => nil})
+      patron.save()
+      patron.update({:name => "Cooler Patron"})
+      expect(patron.name()).to(eq("Cooler Patron"))
+    end
+  end
+  describe("#delete") do
+    it("lets you delete an patron from the database") do
+      patron = Patron.new({:name => "Patron Person", :id => nil})
+      patron.save()
+      patron2 = Patron.new({:name => "Patron Non-Person", :id => nil})
+      patron2.save()
+      patron.delete()
+      expect(Patron.all).to(eq([patron2]))
+    end
+  end
 end
