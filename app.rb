@@ -13,8 +13,8 @@ get('/') do
   erb(:index)
 end
 
-post('/book/new') do
-  title = params.fetch('title')
+post("/book/new") do
+  title = params.fetch("title")
   book = Book.new({:title => title, :id =>nil})
   book.save()
   @success_message = "You have added the book #{title}."
@@ -22,12 +22,12 @@ post('/book/new') do
   erb(:index)
 end
 
-get('/book/:id') do
+get("/book/:id") do
   @book = Book.find(params.fetch('id').to_i())
   erb(:book)
 end
 
-get('/book/:id/edit') do
+get("/book/:id/edit") do
   @book = Book.find(params.fetch('id').to_i())
   erb(:book_edit)
 end
@@ -36,5 +36,12 @@ patch("/book/:id") do
   title = params.fetch("title")
   @book = Book.find(params.fetch("id").to_i())
   @book.update({:title => title})
-  erb(:book)
+  erb(:index)
+end
+
+delete("/book/:id") do
+  @book = Book.find(params.fetch("id").to_i())
+  @book.delete()
+  @books= Book.all()
+  erb(:index)
 end
